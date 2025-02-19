@@ -16,12 +16,12 @@
 ## 主要功能
 
 - 🔍 快速查詢表單欄位的名稱、欄位entry ID（例如：entry.1234567890）
+- ✏️ 可產生預填答案的網址
 - 📋 點擊即可複製欄位資訊
 - ✨ 清楚顯示必填欄位標記
 - 🎯 簡潔直觀的操作介面
 - 💡 複製成功即時提示
-- 🔗 支援產生預填網址功能
-- ✏️ 可即時測試預填答案
+
 
 ## 使用說明
 
@@ -58,10 +58,10 @@ A specialized tool for inspecting Google Form field entry IDs and generating pre
 - 🔍 Quick lookup of form field names and entry IDs (e.g., entry.1234567890)
 - 📋 One-click copy of field information
 - ✨ Clear indication of required fields
+-  ✏️Generate prefilled URL with answers
 - 🎯 Intuitive user interface
 - 💡 Instant copy confirmation
-- 🔗 Prefilled URL generation support
-- ✏️ Real-time prefill testing
+
 
 ## How to Use
 
