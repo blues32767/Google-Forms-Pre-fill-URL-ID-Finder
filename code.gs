@@ -26,11 +26,11 @@ function getFormFields(formUrl) {
     
     // 整理欄位資訊
     var fieldInfo = fields.map(function(field) {
-      if (field && field[0]) {
+      if (field && field[4] && field[4][0]) { // 修改這裡以正確獲取entry ID
         return {
-          title: field[1],
-          id: "entry." + field[0],
-          required: field[4] && field[4][0] && field[4][0][2] === 1
+          title: field[1], // 題目標題
+          id: field[4][0][0], // 直接使用數字ID，不加"entry."前綴
+          required: field[4][0][2] === 1 // 必填欄位檢查
         };
       }
     }).filter(Boolean);
@@ -41,3 +41,4 @@ function getFormFields(formUrl) {
     return "Error錯誤：" + error.toString();
   }
 }
+

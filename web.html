@@ -1,250 +1,482 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Google表單 欄位ID(entry)資訊查詢工具 Google Form Question Entry ID Find tool</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-        
-        body {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        h1 {
-            color: #1a73e8;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .input-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .input-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        label {
-            font-weight: 500;
-            color: #5f6368;
-        }
-        
-        input[type="url"] {
-            flex: 1;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        input[type="url"]:focus {
-            border-color: #1a73e8;
-            outline: none;
-        }
-        
-        button {
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #1557b0;
-        }
-        
-        .result-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-        
-        th {
-            background-color: #f8f9fa;
-            color: #202124;
-            font-weight: 500;
-            text-align: left;
-            padding: 12px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-            cursor: pointer;
-            user-select: all;
-            transition: background-color 0.2s;
-        }
-        
-        tr:hover td {
-            background-color: #f8f9fa;
-        }
-        
-        td.selected {
-            background-color: #e8f0fe !important;
-        }
-        
-        .copy-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #323232;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
-            display: none;
-            animation: fadeInOut 2s ease-in-out;
-        }
-        
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(20px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
-        }
-    </style>
-</head>
-<body>
-    <h1>Google表單 欄位ID(entry)資訊查詢工具 | Google Form Question Entry ID Find tool </h1>
+  <html>
+  <head>
+      <title>Google表單 欄位ID(entry)資訊查詢工具 Google Form Question Entry ID Find tool</title>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+      <style>
+          * {
+              box-sizing: border-box;
+              font-family: 'Noto Sans TC', sans-serif;
+              margin: 0;
+              padding: 0;
+          }
+          
+          body {
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 40px 20px;
+              background-color: #f8f9fa;
+              color: #202124;
+              line-height: 1.6;
+          }
+          
+          .header {
+              text-align: center;
+              margin-bottom: 40px;
+              padding: 20px;
+              background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+              border-radius: 16px;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+              color: white;
+          }
+          
+          .header h1 {
+              font-size: 2.2em;
+              margin-bottom: 8px;
+              font-weight: 700;
+          }
+          
+          .header h4 {
+              font-weight: 400;
+              opacity: 0.9;
+          }
+          
+          .input-container {
+              background: white;
+              padding: 24px;
+              border-radius: 12px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+              margin-bottom: 24px;
+              transition: transform 0.2s ease;
+          }
+          
+          .input-container:hover {
+              transform: translateY(-2px);
+          }
+          
+          .input-group {
+              display: flex;
+              gap: 16px;
+              align-items: center;
+              flex-wrap: wrap;
+          }
+          
+          .input-group label {
+              font-weight: 500;
+              color: #5f6368;
+              min-width: 200px;
+          }
+          
+          input[type="url"] {
+              flex: 1;
+              padding: 12px 16px;
+              border: 2px solid #e0e0e0;
+              border-radius: 8px;
+              font-size: 16px;
+              transition: all 0.3s ease;
+              min-width: 300px;
+          }
+          
+          input[type="url"]:focus {
+              border-color: #1a73e8;
+              box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+              outline: none;
+          }
+          
+          .search-button {
+              background: #1a73e8;
+              color: white;
+              border: none;
+              padding: 12px 24px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-weight: 500;
+              font-size: 16px;
+              transition: all 0.3s ease;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+          }
+          
+          .search-button:hover {
+              background: #1557b0;
+              transform: translateY(-1px);
+              box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+          }
+          
+          .search-button:active {
+              transform: translateY(0);
+          }
+          
+          .result-container {
+              background: white;
+              border-radius: 12px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+              overflow: hidden;
+              margin-bottom: 24px;
+          }
+          
+          table {
+              width: 100%;
+              border-collapse: collapse;
+              background: white;
+          }
+          
+          th {
+              background-color: #f8f9fa;
+              color: #202124;
+              font-weight: 500;
+              text-align: left;
+              padding: 16px;
+              border-bottom: 2px solid #e0e0e0;
+          }
+          
+          td {
+              padding: 16px;
+              border-bottom: 1px solid #e0e0e0;
+              vertical-align: middle;
+          }
+          
+          tr:hover td {
+              background-color: #f8f9fa;
+          }
+          
+          .answer-input {
+              width: 100%;
+              padding: 10px 12px;
+              border: 2px solid #e0e0e0;
+              border-radius: 6px;
+              font-size: 14px;
+              transition: all 0.3s ease;
+          }
+          
+          .answer-input:focus {
+              border-color: #1a73e8;
+              box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+              outline: none;
+          }
+          
+          .prefilled-url-container {
+              background: white;
+              padding: 24px;
+              border-radius: 12px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+              margin-top: 24px;
+          }
+          
+          .prefilled-url-container h3 {
+              color: #202124;
+              margin-bottom: 16px;
+              font-size: 1.2em;
+          }
+          
+          .prefilled-url {
+              word-break: break-all;
+              padding: 16px;
+              background: #f8f9fa;
+              border: 1px solid #e0e0e0;
+              border-radius: 8px;
+              margin: 12px 0;
+              font-family: monospace;
+              font-size: 14px;
+              line-height: 1.5;
+          }
+          
+          .copy-url-btn {
+              background: #1a73e8;
+              color: white;
+              border: none;
+              padding: 12px 24px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-weight: 500;
+              transition: all 0.3s ease;
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+          }
+          
+          .copy-url-btn:hover {
+              background: #1557b0;
+              transform: translateY(-1px);
+              box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+          }
+          
+          .copy-notification {
+              position: fixed;
+              bottom: 24px;
+              right: 24px;
+              background-color: #323232;
+              color: white;
+              padding: 12px 24px;
+              border-radius: 8px;
+              display: none;
+              animation: fadeInOut 2s ease-in-out;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          }
+          
+          footer {
+              text-align: center;
+              margin-top: 40px;
+              padding: 24px;
+              color: #5f6368;
+              border-top: 1px solid #e0e0e0;
+          }
+          
+          footer a {
+              color: #1a73e8;
+              text-decoration: none;
+              transition: color 0.3s ease;
+          }
+          
+          footer a:hover {
+              color: #1557b0;
+              text-decoration: underline;
+          }
+          
+          @keyframes fadeInOut {
+              0% { opacity: 0; transform: translateY(20px); }
+              20% { opacity: 1; transform: translateY(0); }
+              80% { opacity: 1; transform: translateY(0); }
+              100% { opacity: 0; transform: translateY(-20px); }
+          }
+          
+          /* 響應式設計 */
+          @media (max-width: 768px) {
+              body {
+                  padding: 20px 16px;
+              }
+              
+              .input-group {
+                  flex-direction: column;
+              }
+              
+              input[type="url"] {
+                  width: 100%;
+              }
+              
+              .search-button {
+                  width: 100%;
+                  justify-content: center;
+              }
+          }
+     
+     /* 在現有的style標籤內添加這些樣式 */
+          .entry-id-cell {
+              cursor: pointer;
+              position: relative;
+              user-select: all;
+              background-color: #f8f9fa;
+              border: 1px solid #e0e0e0;
+              border-radius: 4px;
+              padding: 8px 12px;
+              font-family: monospace;
+              transition: all 0.2s ease;
+          }
 
-    <div class="input-container">
-        <div class="input-group">
-            <label for="formUrl">請輸入 Google 表單網址(enter GoogleForm URL)：</label>
-            <input type="url" id="formUrl" name="formUrl" placeholder="https://docs.google.com/forms/...">
-            <button onclick="查詢()">查詢欄位資訊 Find!</button>
-        </div>
-    </div>
+          .entry-id-cell:hover {
+              background-color: #e8f0fe;
+              border-color: #1a73e8;
+          }
 
-    <div id="結果顯示區" class="result-container">
-        <table id="fieldsTable" style="display:none">
-            <thead>
-                <tr>
-                    <th>欄位標題 Question Name</th>
-                    <th>欄位 ID(entry) | ID (entry)</th>
-                    <th>必填欄位 Required Field</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+          .entry-id-cell:active {
+              background-color: #d2e3fc;
+          }
 
-    <div id="copyNotification" class="copy-notification">
-        已複製到剪貼簿！ Copied to clipboard!
-    </div>
+          .entry-id-cell::after {
+              content: "點擊複製";
+              position: absolute;
+              top: -30px;
+              left: 50%;
+              transform: translateX(-50%);
+              background-color: #323232;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 12px;
+              opacity: 0;
+              transition: opacity 0.2s ease;
+              pointer-events: none;
+          }
 
+          .entry-id-cell:hover::after {
+              opacity: 1;
+          }
 
-    <footer class="footer">
-        <p>
-            © 2025 Google 表單欄位資訊查詢工具2025 Google Form Field Information Query Tool |  開發者 Developers：<a href="https://github.com/blues32767" target="_blank">blues32767</a>
-            <br>
-            <small>Version 1.0.0 | Last Updated: Taiwan 2025/02/19</small>
-        </p>
-    </footer>
+          .copied::after {
+              content: "已複製！" !important;
+              background-color: #1a73e8 !important;
+          }
 
-    <script>
-       /**
-         * Google表單欄位ID(entry)資訊查詢工具 Google Form Question Entry ID Find tool
-         * @author blues32767
-         * @version 1.0.0
-         * @created Taiwan 2025/02/19
-         * @github https://github.com/blues32767
-         */
-    
-        function 查詢() {
-            var formUrl = document.getElementById("formUrl").value;
-            if (!formUrl) {
-                alert("請輸入表單網址");
-                return;
-            }
+     
+      </style>
+  </head>
+  <body>
+      <div class="header">
+          <h1>Google表單 欄位ID(entry)資訊查詢工具</h1>
+          <h4>Google Form Question Entry ID Find tool</h4>
+      </div>
 
-            google.script.run
-                .withSuccessHandler(顯示欄位資訊)
-                .getFormFields(formUrl);
-        }
+      <div class="input-container">
+          <div class="input-group">
+              <label for="formUrl">請輸入 Google 表單網址：</label>
+              <input type="url" id="formUrl" name="formUrl" placeholder="https://docs.google.com/forms/...">
+              <button onclick="查詢()" class="search-button">
+                  <span>查詢欄位資訊</span>
+              </button>
+          </div>
+      </div>
 
-        function 顯示欄位資訊(fields) {
-            var table = document.getElementById("fieldsTable");
-            var tbody = table.getElementsByTagName("tbody")[0];
-            tbody.innerHTML = "";
+      <div id="結果顯示區" class="result-container">
+          <table id="fieldsTable" style="display:none">
+              <thead>
+                  <tr>
+                      <th>使用者答案</th>
+                      <th>欄位標題</th>
+                      <th>欄位 ID(entry)</th>
+                      <th>必填欄位</th>
+                  </tr>
+              </thead>
+              <tbody></tbody>
+          </table>
+      </div>
 
-            if (Array.isArray(fields)) {
-                table.style.display = "table";
-                fields.forEach(function(field) {
-                    var row = tbody.insertRow();
-                    var cells = [
-                        row.insertCell(0),
-                        row.insertCell(1),
-                        row.insertCell(2)
-                    ];
+      <div id="prefilledUrlContainer" class="prefilled-url-container" style="display:none">
+          <h3>預填網址</h3>
+          <div id="prefilledUrl" class="prefilled-url"></div>
+          <button onclick="copyPrefilledUrl()" class="copy-url-btn">
+              複製預填網址
+          </button>
+      </div>
+
+      <div id="copyNotification" class="copy-notification">
+          已複製到剪貼簿！
+      </div>
+
+      <footer>
+          <p>
+              © 2025 Google 表單欄位資訊查詢工具<br>
+              Google Form Field Information Query Tool<br>
+              開發者：<a href="https://github.com/blues32767" target="_blank">blues32767</a><br>
+              <small>Version 1.0.0 | Last Updated: Taiwan 2025/02/19</small>
+          </p>
+      </footer>
+
+      <script>
+          let originalFormUrl = '';
+          
+          function 查詢() {
+              var formUrl = document.getElementById("formUrl").value;
+              if (!formUrl) {
+                  alert("請輸入表單網址");
+                  return;
+              }
+              originalFormUrl = formUrl;
+              google.script.run
+                  .withSuccessHandler(顯示欄位資訊)
+                  .getFormFields(formUrl);
+          }
+
+          // 在web.html中的顯示欄位資訊函數
+          function 顯示欄位資訊(fields) {
+    var table = document.getElementById("fieldsTable");
+    var tbody = table.getElementsByTagName("tbody")[0];
+    tbody.innerHTML = "";
+
+    if (Array.isArray(fields)) {
+        table.style.display = "table";
+        fields.forEach(function(field) {
+            var row = tbody.insertRow();
+            var answerCell = row.insertCell(0);
+            var titleCell = row.insertCell(1);
+            var idCell = row.insertCell(2);
+            var requiredCell = row.insertCell(3);
+            
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'answer-input';
+            input.setAttribute('data-entry-id', 'entry.' + field.id);
+            input.placeholder = '請輸入答案...';
+            input.addEventListener('input', updatePrefilledUrl);
+            answerCell.appendChild(input);
+            
+            titleCell.textContent = field.title;
+            
+            // 創建可點擊複製的ID單元格
+            var idDiv = document.createElement('div');
+            idDiv.className = 'entry-id-cell';
+            idDiv.textContent = 'entry.' + field.id;
+            idDiv.addEventListener('click', function(e) {
+                // 複製文字到剪貼簿
+                navigator.clipboard.writeText(e.target.textContent).then(function() {
+                    // 添加複製成功的視覺反饋
+                    e.target.classList.add('copied');
+                    setTimeout(function() {
+                        e.target.classList.remove('copied');
+                    }, 1000);
                     
-                    cells[0].textContent = field.title;
-                    cells[1].textContent = field.id;
-                    cells[2].textContent = field.required ? "是" : "否";
-                    
-                    cells.forEach(cell => {
-                        cell.addEventListener('click', function(e) {
-                            // 移除其他儲存格的選中狀態
-                            document.querySelectorAll('td.selected').forEach(td => {
-                                td.classList.remove('selected');
-                            });
-                            
-                            // 添加選中狀態
-                            this.classList.add('selected');
-                            
-                            // 複製內容到剪貼簿
-                            navigator.clipboard.writeText(this.textContent).then(() => {
-                                showCopyNotification();
-                            });
-                        });
-                    });
+                    // 顯示通知
+                    showCopyNotification();
                 });
-            } else {
-                table.style.display = "none";
-                document.getElementById("結果顯示區").innerHTML = '<p style="padding: 20px; color: #d93025;">' + fields + '</p>';
-            }
-        }
+            });
+            idCell.appendChild(idDiv);
+            
+            requiredCell.textContent = field.required ? "是" : "否";
+        });
         
-        function showCopyNotification() {
-            const notification = document.getElementById('copyNotification');
-            notification.style.display = 'block';
-            
-            // 重置動畫
-            notification.style.animation = 'none';
-            notification.offsetHeight; // 觸發重排
-            notification.style.animation = 'fadeInOut 2s ease-in-out';
-            
-            // 2秒後隱藏通知
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 2000);
-        }
-    </script>
-    
+        document.getElementById('prefilledUrlContainer').style.display = 'block';
+        updatePrefilledUrl();
+    } else {
+        table.style.display = "none";
+        document.getElementById("結果顯示區").innerHTML = 
+            '<p style="padding: 20px; color: #d93025;">' + fields + '</p>';
+    }
+}
 
-        
-</body>
-</html>
+
+
+          function updatePrefilledUrl() {
+              let baseUrl = originalFormUrl;
+              if (baseUrl.includes('/edit')) {
+                  baseUrl = baseUrl.replace('/edit', '/viewform');
+              }
+              if (!baseUrl.includes('/viewform')) {
+                  baseUrl += '/viewform';
+              }
+              
+              const inputs = document.querySelectorAll('.answer-input');
+              const params = [];
+              
+              inputs.forEach(input => {
+                  if (input.value) {
+                      params.push(`${input.getAttribute('data-entry-id')}=${encodeURIComponent(input.value)}`);
+                  }
+              });
+              
+              const prefilledUrl = params.length > 0 
+                  ? `${baseUrl}?${params.join('&')}`
+                  : baseUrl;
+              
+              document.getElementById('prefilledUrl').textContent = prefilledUrl;
+          }
+
+          function copyPrefilledUrl() {
+              const prefilledUrl = document.getElementById('prefilledUrl').textContent;
+              navigator.clipboard.writeText(prefilledUrl).then(() => {
+                  showCopyNotification();
+              });
+          }
+          
+          function showCopyNotification() {
+              const notification = document.getElementById('copyNotification');
+              notification.style.display = 'block';
+              notification.style.animation = 'none';
+              notification.offsetHeight;
+              notification.style.animation = 'fadeInOut 2s ease-in-out';
+              
+              setTimeout(() => {
+                  notification.style.display = 'none';
+              }, 2000);
+          }
+      </script>
+  </body>
+  </html>
