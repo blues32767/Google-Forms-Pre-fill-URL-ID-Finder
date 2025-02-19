@@ -1,5 +1,5 @@
 # Google 表單預填網址產生器 + 欄位 ID 查詢工具
-# Google Forms Pre-fill URL Generator & Field ID Finder
+# Google Forms Pre-fill URL Generator & Question Entry ID Finder
 
 ![Version](https://img.shields.io/badge/version-1.1.0-blue)
 ![Updated](https://img.shields.io/badge/updated-2025--02--19-green)
