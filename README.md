@@ -77,6 +77,51 @@ A specialized tool for inspecting Google Form field entry IDs. This tool helps d
 ...
 [中文完整內容]
 
+## 檔案結構
+
+```
+├── code.gs          # Google Apps Script 後端程式碼
+└── web.html        # 前端介面
+```
+
+## 安裝步驟
+
+1. 開啟 [Google Apps Script](https://script.google.com/)
+2. 建立新專案
+3. 複製 `Code.gs` 內容到專案["指令碼"]中
+4. 按+建立"HTML"將 `web.html` 檔案並複製內容
+5. "部署"為網頁應用程式
+6. 設定適當的存取權限
+
+## 開發者資訊
+
+- 作者：blues32767
+- GitHub：[blues32767](https://github.com/blues32767)
+- 版本：1.0.0
+- 更新日期：Taiwan 2025/02/19
+
+## 授權條款
+
+MIT License
+
+## 更新記錄
+
+### v1.0.0 (2025/02/19)
+- 初始版本發布
+- 實現基本查詢功能
+- 加入複製提示功能
+- 優化使用者介面
+
+## 貢獻指南
+
+歡迎提交 Issue 或 Pull Request 來改善這個工具！
+
+1. Fork 這個專案
+2. 建立您的特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交您的更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 開啟一個 Pull Request
+
 ---
 
 <a name="english-full"></a>
@@ -85,6 +130,44 @@ A specialized tool for inspecting Google Form field entry IDs. This tool helps d
 ## Project Structure
 ...
 [English full content]
+
+## Installation Steps
+
+1. Open [Google Apps Script](https://script.google.com/)
+2. Create a new project
+3. Copy `Code.gs` content into the project
+4. Create `web.html` file and copy the content
+5. Deploy as a web application
+6. Configure appropriate access permissions
+
+## Developer Information
+
+- Author: blues32767
+- GitHub: [blues32767](https://github.com/blues32767)
+- Version: 1.0.0
+- Last Updated: Taiwan 2025/02/19
+
+## License
+
+MIT License
+
+## Changelog
+
+### v1.0.0 (2025/02/19)
+- Initial release
+- Implemented basic query functionality
+- Added copy notification feature
+- Enhanced user interface
+
+## Contributing
+
+Contributions are welcome! Feel free to submit Issues or Pull Requests to improve this tool.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
