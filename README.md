@@ -11,7 +11,7 @@
 <a name="chinese"></a>
 # 中文說明
 
-這是一個專門用於查詢 Google 表單欄位 entry ID 的工具。當您需要透過程式自動填寫或處理 Google 表單時，這個工具可以幫助您快速獲取所需的 entry ID、欄位標題與必填狀態資訊。
+這是一個專門用於查詢 Google 表單欄位 entry ID 的工具。當您需要透過程式自動填寫或處理 Google 表單時，這個工具可以幫助您快速獲取所需的 entry ID、欄位標題與必填狀態資訊，並且可以直接產生預填網址。
 
 ## 主要功能
 
@@ -20,13 +20,22 @@
 - ✨ 清楚顯示必填欄位標記
 - 🎯 簡潔直觀的操作介面
 - 💡 複製成功即時提示
+- 🔗 支援產生預填網址功能
+- ✏️ 可即時測試預填答案
 
 ## 使用說明
 
+### 基本查詢
 1. 開啟工具網頁
 2. 貼上 Google 表單網址（例如：https://docs.google.com/forms/d/e/...）
 3. 點擊「查詢欄位資訊」按鈕
-4. 點擊任何欄位資訊即可複製
+4. 點擊任何欄位ID即可複製
+
+### 預填網址功能
+1. 在查詢結果中的「使用者答案」欄位輸入測試答案
+2. 系統會自動生成包含預填答案的網址
+3. 使用「複製預填網址」按鈕複製完整網址
+4. 可直接使用該網址測試預填效果
 
 ## 技術實作
 
@@ -42,7 +51,7 @@
 <a name="english"></a>
 # English Documentation
 
-A specialized tool for inspecting Google Form field entry IDs. This tool helps developers quickly retrieve entry IDs, field titles, and required status information when working with Google Forms programmatically.
+A specialized tool for inspecting Google Form field entry IDs and generating prefilled URLs. This tool helps developers quickly retrieve entry IDs, field titles, and required status information when working with Google Forms programmatically.
 
 ## Key Features
 
@@ -51,13 +60,22 @@ A specialized tool for inspecting Google Form field entry IDs. This tool helps d
 - ✨ Clear indication of required fields
 - 🎯 Intuitive user interface
 - 💡 Instant copy confirmation
+- 🔗 Prefilled URL generation support
+- ✏️ Real-time prefill testing
 
 ## How to Use
 
+### Basic Query
 1. Open the tool webpage
 2. Paste your Google Form URL (e.g., https://docs.google.com/forms/d/e/...)
 3. Click "Search Fields"
-4. Click any field information to copy
+4. Click any field ID to copy
+
+### Prefilled URL Feature
+1. Enter test answers in the "User Answer" column of the query results
+2. The system will automatically generate a URL with prefilled answers
+3. Use the "Copy Prefilled URL" button to copy the complete URL
+4. Test the prefill effect directly using the generated URL
 
 ## Technical Implementation
 
@@ -67,6 +85,7 @@ A specialized tool for inspecting Google Form field entry IDs. This tool helps d
 - Google Forms API Integration
 
 [View more in English...](#english-full)
+
 
 ---
 
