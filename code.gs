@@ -1,5 +1,5 @@
 /**
- * Google 表單欄位(Entry ID)資訊查詢工具 Google Form Question Entry ID Find tool
+ * Google表單預填答案網址產生+欄位(entry)ID查詢工具 Google Forms Pre-fill URL Generator & Entry ID Finder
  * @author blues32767
  * @version 1.0.0
  * @created taiwan 2025/02/19
