@@ -1,9 +1,14 @@
-# Google表單欄位ID(entry)資訊查詢工具 (Google Form Entry ID Inspector)
+# Google表單欄位ID(entry)資訊查詢工具 | Google Form Entry ID Inspector
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Updated](https://img.shields.io/badge/updated-2025--02--19-green)
 
-查詢工具連結：https://script.google.com/macros/s/AKfycbwhxuWAOrCc36cLnAmr4VnEvgue0cXF1R-cOCii2uwOUViptrsrLk5osbf5i_AKnbRy/exec
+[English](#english) | [中文說明](#chinese)
+
+工具連結 | Tool Link: https://script.google.com/macros/s/AKfycbwhxuWAOrCc36cLnAmr4VnEvgue0cXF1R-cOCii2uwOUViptrsrLk5osbf5i_AKnbRy/exec
+
+<a name="chinese"></a>
+# 中文說明
 
 這是一個專門用於查詢 Google 表單欄位 entry ID 的工具。當您需要透過程式自動填寫或處理 Google 表單時，這個工具可以幫助您快速獲取所需的 entry ID、欄位標題與必填狀態資訊。
 
@@ -29,75 +34,64 @@
 - JavaScript 互動功能
 - Google Forms API 整合
 
+[查看更多中文說明...](#chinese-full)
+
+---
+
+<a name="english"></a>
+# English Documentation
+
+A specialized tool for inspecting Google Form field entry IDs. This tool helps developers quickly retrieve entry IDs, field titles, and required status information when working with Google Forms programmatically.
+
+## Key Features
+
+- 🔍 Quick lookup of form field names and entry IDs (e.g., entry.1234567890)
+- 📋 One-click copy of field information
+- ✨ Clear indication of required fields
+- 🎯 Intuitive user interface
+- 💡 Instant copy confirmation
+
+## How to Use
+
+1. Open the tool webpage
+2. Paste your Google Form URL (e.g., https://docs.google.com/forms/d/e/...)
+3. Click "Search Fields"
+4. Click any field information to copy
+
+## Technical Implementation
+
+- Google Apps Script Backend
+- HTML5 + CSS3 Frontend
+- JavaScript Interactions
+- Google Forms API Integration
+
+[View more in English...](#english-full)
+
+---
+
+<a name="chinese-full"></a>
+# 完整中文說明
+
 ## 專案結構
+...
+[中文完整內容]
 
-```
-├── 程式碼.gs          # Google Apps Script 主程式
-└── 網頁.html        # 前端網頁介面
-```
+---
 
-## 部署方式
+<a name="english-full"></a>
+# Full English Documentation
 
-1. 前往 [Google Apps Script](https://script.google.com/)
-2. 建立新專案
-3. 複製 `Code.gs` 程式碼
-4. 新增 HTML 檔案命名為「web」並複製內容
-5. 部署為網頁應用程式
-6. 設定存取權限
+## Project Structure
+...
+[English full content]
 
-## 開發資訊
+---
 
-- 開發者：blues32767
-- GitHub：[blues32767](https://github.com/blues32767)
-- 版本號：1.0.0
-- 更新日期：2025/02/19
-
-## 授權說明
+## License | 授權條款
 
 MIT License
 
-## 版本紀錄
+## Contact | 聯絡方式
 
-### v1.0.0 (2025/02/19)
-- 首次發布
-- 實現 entry ID 查詢功能
-- 支援一鍵複製功能
-- 完成使用者介面設計
-- 加入複製成功提示
-
-## 問題回報與建議
-
-歡迎透過以下方式提供意見：
-
-1. 在 GitHub 上開立 Issue
-2. 提交 Pull Request
-3. 直接聯繫開發者
-
-## 開發貢獻
-
-如果您想要協助改善這個工具：
-
-1. Fork 此專案
-2. 建立您的功能分支 (`git checkout -b feature/YourFeature`)
-3. 提交變更 (`git commit -m '新增功能：XXX'`)
-4. 推送到分支 (`git push origin feature/YourFeature`)
-5. 建立 Pull Request
-
-## 使用範例
-
-### 查詢結果範例
-```
-欄位標題：姓名
-Entry ID：entry.1234567890
-必填欄位：是
-
-欄位標題：電子郵件
-Entry ID：entry.2345678901
-必填欄位：是
-```
-
-## 注意事項
-
-- 使用本工具時請確保您有適當的權限存取目標表單
-- 建議在使用 entry ID 進行表單操作時遵守 Google 表單的使用規範
-- 本工具僅供開發測試使用，請勿用於惡意目的
+- Developer | 開發者：blues32767
+- GitHub：[blues32767](https://github.com/blues32767)
