@@ -1,4 +1,4 @@
-# Google表單欄位ID(entry)資訊查詢工具 | Google Form Entry ID Inspector
+# Google表單欄位ID(entry)資訊查詢工具 | Google Form Question Entry ID Find tool
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Updated](https://img.shields.io/badge/updated-2025--02--19-green)
