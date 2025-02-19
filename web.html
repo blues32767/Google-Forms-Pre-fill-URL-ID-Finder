@@ -1,8 +1,39 @@
   <html>
   <head>
-      <title>Google表單 欄位ID(entry)資訊查詢工具 Google Form Question Entry ID Find tool</title>
+      <title>Google表單預填答案網址產生+欄位(entry)ID查詢工具 Google Forms Pre-fill URL Generator & Entry ID Finder</title>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
       <style>
+        
+            textarea.answer-input {
+                min-height: 100px;
+                resize: vertical;
+                line-height: 1.5;
+                white-space: pre-wrap;
+            }
+
+            .radio-group, .checkbox-group {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                padding: 8px 0;
+            }
+
+            .radio-option, .checkbox-option {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .radio-option label, .checkbox-option label {
+                cursor: pointer;
+            }
+
+            input[type="radio"], input[type="checkbox"] {
+                cursor: pointer;
+                width: 16px;
+                height: 16px;
+            }
+
           * {
               box-sizing: border-box;
               font-family: 'Noto Sans TC', sans-serif;
@@ -307,21 +338,120 @@
               background-color: #1a73e8 !important;
           }
 
-     
+          select.answer-input {
+              appearance: none;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+              background-repeat: no-repeat;
+              background-position: right 10px center;
+              background-size: 1em;
+              padding-right: 40px;
+          }
+
+          select.answer-input:focus {
+              border-color: #1a73e8;
+              box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+          }
+
+          select.answer-input option {
+              padding: 8px;
+              font-size: 14px;
+          }
+                  .grid-group {
+                      border: 1px solid #e0e0e0;
+                      border-radius: 8px;
+                      padding: 16px;
+                      margin-bottom: 8px;
+                  }
+
+                  .grid-row {
+                      display: flex;
+                      align-items: center;
+                      margin-bottom: 12px;
+                  }
+
+                  .grid-row-label {
+                      min-width: 150px;
+                      font-weight: 500;
+                  }
+
+                  .grid-options {
+                      display: flex;
+                      gap: 16px;
+                  }
+
+                  .grid-option {
+                      display: flex;
+                      align-items: center;
+                      gap: 4px;
+                  }
+
+                  .grid-option input {
+                      margin: 0;
+                  }
+
+                  .grid-option label {
+                      cursor: pointer;
+                  }
+
+                  .datetime-group,
+                  .time-group {
+                      display: flex;
+                      gap: 12px;
+                      align-items: center;
+                  }
+
+                  .time-container {
+                      display: flex;
+                      gap: 8px;
+                      align-items: center;
+                  }
+
+                  .time-input {
+                      width: 50px;
+                      padding: 8px;
+                      border: 2px solid #e0e0e0;
+                      border-radius: 6px;
+                      text-align: center;
+                  }
+
+                  .ampm-select {
+                      padding: 8px;
+                      border: 2px solid #e0e0e0;
+                      border-radius: 6px;
+                      background-color: white;
+                  }
+
+                  input[type="date"] {
+                      padding: 8px;
+                      border: 2px solid #e0e0e0;
+                      border-radius: 6px;
+                      font-family: inherit;
+                  }
+
+                  .time-input:focus,
+                  .ampm-select:focus,
+                  input[type="date"]:focus {
+                      border-color: #1a73e8;
+                      box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+                      outline: none;
+                  }
+
       </style>
   </head>
   <body>
       <div class="header">
-          <h1>Google表單 欄位ID(entry)資訊查詢工具</h1>
-          <h4>Google Form Question Entry ID Find tool</h4>
+          <h1>Google表單預填答案網址產生+欄位(entry)ID查詢工具</h1>
+          <h4>Google Forms Pre-fill URL Generator & Entry ID Finder</h4>
       </div>
 
       <div class="input-container">
           <div class="input-group">
-              <label for="formUrl">請輸入 Google 表單網址：</label>
+              <label for="formUrl">請輸入 Google 表單網址(Enter Googleforms Url)：</label>
               <input type="url" id="formUrl" name="formUrl" placeholder="https://docs.google.com/forms/...">
               <button onclick="查詢()" class="search-button">
-                  <span>查詢欄位資訊</span>
+                  <span>查詢　Find</span>
               </button>
           </div>
       </div>
@@ -330,10 +460,10 @@
           <table id="fieldsTable" style="display:none">
               <thead>
                   <tr>
-                      <th>使用者答案</th>
-                      <th>欄位標題</th>
-                      <th>欄位 ID(entry)</th>
-                      <th>必填欄位</th>
+                      <th>使用者答案 Your Answer</th>
+                      <th>欄位標題 Question Title</th>
+                      <th>欄位 ID(entry) Question ID</th>
+                      <th>必填欄位 Must Answer</th>
                   </tr>
               </thead>
               <tbody></tbody>
@@ -341,23 +471,25 @@
       </div>
 
       <div id="prefilledUrlContainer" class="prefilled-url-container" style="display:none">
-          <h3>預填網址</h3>
+          <h3>預填網址 Auto-fill Link</h3>
           <div id="prefilledUrl" class="prefilled-url"></div>
           <button onclick="copyPrefilledUrl()" class="copy-url-btn">
-              複製預填網址
+              複製預填網址 Copy Auto-fill Link
           </button>
       </div>
 
       <div id="copyNotification" class="copy-notification">
-          已複製到剪貼簿！
+          已複製到剪貼簿！ Copied
       </div>
 
       <footer>
           <p>
-              © 2025 Google 表單欄位資訊查詢工具<br>
-              Google Form Field Information Query Tool<br>
-              開發者：<a href="https://github.com/blues32767" target="_blank">blues32767</a><br>
-              <small>Version 1.0.0 | Last Updated: Taiwan 2025/02/19</small>
+              © 2025 Google表單預填答案網址產生+欄位(entry)ID查詢工具<br>
+              Google Forms Pre-fill URL Generator & Entry ID Finder<br>
+              開發者 Developer ：<a href="https://github.com/blues32767" target="_blank">blues32767</a><br>
+              <small>Version 1.0.0 | Last Updated: Taiwan 2025/02/19</small><br>
+              ※如需要登入的Google表單無法使用；不支援日期、時間填寫。<br>
+              ※Warning: Won't work with Google Forms that need login. Can't pre-fill dates and times.<br>
           </p>
       </footer>
 
@@ -377,87 +509,389 @@
           }
 
           // 在web.html中的顯示欄位資訊函數
-          function 顯示欄位資訊(fields) {
-    var table = document.getElementById("fieldsTable");
-    var tbody = table.getElementsByTagName("tbody")[0];
-    tbody.innerHTML = "";
+              function 顯示欄位資訊(fields) {
+                  var table = document.getElementById("fieldsTable");
+                  var tbody = table.getElementsByTagName("tbody")[0];
+                  tbody.innerHTML = "";
 
-    if (Array.isArray(fields)) {
-        table.style.display = "table";
-        fields.forEach(function(field) {
-            var row = tbody.insertRow();
-            var answerCell = row.insertCell(0);
-            var titleCell = row.insertCell(1);
-            var idCell = row.insertCell(2);
-            var requiredCell = row.insertCell(3);
-            
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'answer-input';
-            input.setAttribute('data-entry-id', 'entry.' + field.id);
-            input.placeholder = '請輸入答案...';
-            input.addEventListener('input', updatePrefilledUrl);
-            answerCell.appendChild(input);
-            
-            titleCell.textContent = field.title;
-            
-            // 創建可點擊複製的ID單元格
-            var idDiv = document.createElement('div');
-            idDiv.className = 'entry-id-cell';
-            idDiv.textContent = 'entry.' + field.id;
-            idDiv.addEventListener('click', function(e) {
-                // 複製文字到剪貼簿
-                navigator.clipboard.writeText(e.target.textContent).then(function() {
-                    // 添加複製成功的視覺反饋
-                    e.target.classList.add('copied');
-                    setTimeout(function() {
-                        e.target.classList.remove('copied');
-                    }, 1000);
-                    
-                    // 顯示通知
-                    showCopyNotification();
-                });
-            });
-            idCell.appendChild(idDiv);
-            
-            requiredCell.textContent = field.required ? "是" : "否";
-        });
-        
-        document.getElementById('prefilledUrlContainer').style.display = 'block';
-        updatePrefilledUrl();
-    } else {
-        table.style.display = "none";
-        document.getElementById("結果顯示區").innerHTML = 
-            '<p style="padding: 20px; color: #d93025;">' + fields + '</p>';
-    }
-}
+                  if (Array.isArray(fields)) {
+                      table.style.display = "table";
+                      fields.forEach(function(field) {
+                          var row = tbody.insertRow();
+                          var answerCell = row.insertCell(0);
+                          var titleCell = row.insertCell(1);
+                          var idCell = row.insertCell(2);
+                          var requiredCell = row.insertCell(3);
+                          
+                          // 根據欄位類型建立不同的輸入元素
+                          let inputElement;
+                          
+                          switch(field.type) {
+                              case 'PARAGRAPH':
+                                  inputElement = document.createElement('textarea');
+                                  inputElement.className = 'answer-input';
+                                  inputElement.placeholder = '請輸入答案...';
+                                  inputElement.rows = 4;
+                                  break;
+                                  
+                              case 'RADIO':
+                                  inputElement = document.createElement('div');
+                                  inputElement.className = 'radio-group';
+                                  field.options.forEach(option => {
+                                      const wrapper = document.createElement('div');
+                                      wrapper.className = 'radio-option';
+                                      
+                                      const radio = document.createElement('input');
+                                      radio.type = 'radio';
+                                      radio.name = 'entry.' + field.id;
+                                      radio.value = option;
+                                      radio.id = `radio-${field.id}-${option}`;
+                                      
+                                      const label = document.createElement('label');
+                                      label.htmlFor = radio.id;
+                                      label.textContent = option;
+                                      
+                                      wrapper.appendChild(radio);
+                                      wrapper.appendChild(label);
+                                      inputElement.appendChild(wrapper);
+                                  });
+                                  break;
+                                  
+                                case 'CHECKBOX':
+                                    inputElement = document.createElement('div');
+                                    inputElement.className = 'checkbox-group';
+                                    inputElement.setAttribute('data-entry-id', 'entry.' + field.id); // 添加這行
+                                    field.options.forEach(option => {
+                                        const wrapper = document.createElement('div');
+                                        wrapper.className = 'checkbox-option';
+                                        
+                                        const checkbox = document.createElement('input');
+                                        checkbox.type = 'checkbox';
+                                        checkbox.name = 'entry.' + field.id; // 添加這行
+                                        checkbox.value = option;
+                                        checkbox.id = `checkbox-${field.id}-${option}`;
+                                        
+                                        const label = document.createElement('label');
+                                        label.htmlFor = checkbox.id;
+                                        label.textContent = option;
+                                        
+                                        wrapper.appendChild(checkbox);
+                                        wrapper.appendChild(label);
+                                        inputElement.appendChild(wrapper);
+                                        
+                                        // 為每個checkbox添加change事件監聽器
+                                        checkbox.addEventListener('change', updatePrefilledUrl);
+                                    });
+                                    break;
 
 
+                              case 'LIST':
+                                  inputElement = document.createElement('select');
+                                  inputElement.className = 'answer-input';
+                                  
+                                  // 添加預設空選項
+                                  let defaultOption = document.createElement('option');
+                                  defaultOption.value = '';
+                                  defaultOption.text = '請選擇...';
+                                  defaultOption.disabled = field.required;
+                                  defaultOption.selected = true;
+                                  inputElement.appendChild(defaultOption);
+                                  
+                                  // 添加所有選項
+                                  if (field.options) {
+                                      field.options.forEach(option => {
+                                          let optionElement = document.createElement('option');
+                                          optionElement.value = option;
+                                          optionElement.text = option;
+                                          inputElement.appendChild(optionElement);
+                                      });
+                                  }
+                                  break;
 
-          function updatePrefilledUrl() {
-              let baseUrl = originalFormUrl;
-              if (baseUrl.includes('/edit')) {
-                  baseUrl = baseUrl.replace('/edit', '/viewform');
-              }
-              if (!baseUrl.includes('/viewform')) {
-                  baseUrl += '/viewform';
-              }
-              
-              const inputs = document.querySelectorAll('.answer-input');
-              const params = [];
-              
-              inputs.forEach(input => {
-                  if (input.value) {
-                      params.push(`${input.getAttribute('data-entry-id')}=${encodeURIComponent(input.value)}`);
+                                  case 'GRID': // 單選方格
+                                      inputElement = document.createElement('div');
+                                      inputElement.className = 'grid-group';
+                                      field.rows.forEach(row => {
+                                          const rowDiv = document.createElement('div');
+                                          rowDiv.className = 'grid-row';
+                                          
+                                          const rowLabel = document.createElement('div');
+                                          rowLabel.className = 'grid-row-label';
+                                          rowLabel.textContent = row.title;
+                                          rowDiv.appendChild(rowLabel);
+                                          
+                                          const optionsDiv = document.createElement('div');
+                                          optionsDiv.className = 'grid-options';
+                                          
+                                          field.rows[0].options.forEach(option => {
+                                              const wrapper = document.createElement('div');
+                                              wrapper.className = 'grid-option';
+                                              
+                                              const radio = document.createElement('input');
+                                              radio.type = 'radio';
+                                              radio.name = 'entry.' + row.id;
+                                              radio.value = option;
+                                              radio.id = `grid-${row.id}-${option}`;
+                                              
+                                              const label = document.createElement('label');
+                                              label.htmlFor = radio.id;
+                                              label.textContent = option;
+                                              
+                                              wrapper.appendChild(radio);
+                                              wrapper.appendChild(label);
+                                              optionsDiv.appendChild(wrapper);
+                                              
+                                              radio.addEventListener('change', updatePrefilledUrl);
+                                          });
+                                          
+                                          rowDiv.appendChild(optionsDiv);
+                                          inputElement.appendChild(rowDiv);
+                                      });
+                                      break;
+
+                                  case 'GRID_CHECKBOX': // 核取方格
+                                          inputElement = document.createElement('div');
+                                          inputElement.className = 'grid-group checkbox-grid';  // 添加特殊類名以便識別
+                                          field.rows.forEach(row => {
+                                              const rowDiv = document.createElement('div');
+                                              rowDiv.className = 'grid-row';
+                                              
+                                              const rowLabel = document.createElement('div');
+                                              rowLabel.className = 'grid-row-label';
+                                              rowLabel.textContent = row.title;
+                                              rowDiv.appendChild(rowLabel);
+                                              
+                                              const optionsDiv = document.createElement('div');
+                                              optionsDiv.className = 'grid-options';
+                                              
+                                              field.rows[0].options.forEach(option => {
+                                                  const wrapper = document.createElement('div');
+                                                  wrapper.className = 'grid-option';
+                                                  
+                                                  const checkbox = document.createElement('input');
+                                                  checkbox.type = 'checkbox';  // 確保使用 checkbox 類型
+                                                  checkbox.name = 'entry.' + row.id;
+                                                  checkbox.value = option;
+                                                  checkbox.id = `grid-${row.id}-${option}`;
+                                                  
+                                                  const label = document.createElement('label');
+                                                  label.htmlFor = checkbox.id;
+                                                  label.textContent = option;
+                                                  
+                                                  wrapper.appendChild(checkbox);
+                                                  wrapper.appendChild(label);
+                                                  optionsDiv.appendChild(wrapper);
+                                                  
+                                                  checkbox.addEventListener('change', updatePrefilledUrl);
+                                              });
+                                              
+                                              rowDiv.appendChild(optionsDiv);
+                                              inputElement.appendChild(rowDiv);
+                                          });
+                                          break;
+
+                                          case 'DATE_TIME':
+                                              inputElement = document.createElement('div');
+                                              inputElement.className = 'datetime-group';
+                                              inputElement.setAttribute('data-entry-id', 'entry.' + field.id); 
+                                              
+                                              // 日期輸入
+                                              const dateInput = document.createElement('input');
+                                              dateInput.type = 'date';
+                                              dateInput.className = 'answer-input';
+                                              dateInput.addEventListener('change', updatePrefilledUrl); // 添加這行
+                                              inputElement.appendChild(dateInput);
+                                              
+                                              if (field.includesTime) {
+                                                  // 時間輸入
+                                                  const timeContainer = document.createElement('div');
+                                                  timeContainer.className = 'time-container';
+                                                  
+                                                  const hourInput = document.createElement('input');
+                                                  hourInput.type = 'text';
+                                                  hourInput.placeholder = '時';
+                                                  hourInput.className = 'time-input';
+                                                  hourInput.maxLength = 2;
+                                                  
+                                                  const minuteInput = document.createElement('input');
+                                                  minuteInput.type = 'text';
+                                                  minuteInput.placeholder = '分';
+                                                  minuteInput.className = 'time-input';
+                                                  minuteInput.maxLength = 2;
+                                                  
+                                                  const ampmSelect = document.createElement('select');
+                                                  ampmSelect.className = 'ampm-select';
+                                                  ['AM', 'PM'].forEach(period => {
+                                                      const option = document.createElement('option');
+                                                      option.value = period;
+                                                      option.text = period;
+                                                      ampmSelect.appendChild(option);
+                                                  });
+                                                  hourInput.addEventListener('input', updatePrefilledUrl);
+                                                  minuteInput.addEventListener('input', updatePrefilledUrl);
+                                                  ampmSelect.addEventListener('change', updatePrefilledUrl);
+                                                  timeContainer.appendChild(hourInput);
+                                                  timeContainer.appendChild(document.createTextNode(':'));
+                                                  timeContainer.appendChild(minuteInput);
+                                                  timeContainer.appendChild(ampmSelect);
+                                                  
+                                                  inputElement.appendChild(timeContainer);
+                                              }
+                                              break;
+
+                                          case 'TIME':
+                                              inputElement = document.createElement('div');
+                                              inputElement.className = 'time-group';
+                                              inputElement.setAttribute('data-entry-id', 'entry.' + field.id);
+                                              
+                                              const timeHourInput = document.createElement('input');
+                                              timeHourInput.type = 'text';
+                                              timeHourInput.placeholder = '時';
+                                              timeHourInput.className = 'time-input';
+                                              timeHourInput.maxLength = 2;
+                                              
+                                              const timeMinuteInput = document.createElement('input');
+                                              timeMinuteInput.type = 'text';
+                                              timeMinuteInput.placeholder = '分';
+                                              timeMinuteInput.className = 'time-input';
+                                              timeMinuteInput.maxLength = 2;
+                                              
+                                              const timeAmpmSelect = document.createElement('select');
+                                              timeAmpmSelect.className = 'ampm-select';
+                                              ['AM', 'PM'].forEach(period => {
+                                                  const option = document.createElement('option');
+                                                  option.value = period;
+                                                  option.text = period;
+                                                  timeAmpmSelect.appendChild(option);
+                                              });
+                                              timeHourInput.addEventListener('input', updatePrefilledUrl);
+                                              timeMinuteInput.addEventListener('input', updatePrefilledUrl);
+                                              timeAmpmSelect.addEventListener('change', updatePrefilledUrl);
+
+                                              inputElement.appendChild(timeHourInput);
+                                              inputElement.appendChild(document.createTextNode(':'));
+                                              inputElement.appendChild(timeMinuteInput);
+                                              inputElement.appendChild(timeAmpmSelect);
+                                              break;
+
+
+                              default: // TEXT
+                                  inputElement = document.createElement('input');
+                                  inputElement.type = 'text';
+                                  inputElement.className = 'answer-input';
+                                  inputElement.placeholder = '請輸入答案...';
+                                  break;
+                          }
+                          
+                          // 設置共同屬性
+                          inputElement.setAttribute('data-entry-id', 'entry.' + field.id);
+                          if (inputElement.tagName !== 'DIV') { // 不是 radio 或 checkbox 群組
+                              inputElement.addEventListener('input', updatePrefilledUrl);
+                          }
+                          inputElement.addEventListener('change', updatePrefilledUrl);
+                          
+                          answerCell.appendChild(inputElement);
+                          titleCell.textContent = field.title;
+                          
+                          // 創建可點擊複製的ID單元格
+                          var idDiv = document.createElement('div');
+                          idDiv.className = 'entry-id-cell';
+                          idDiv.textContent = 'entry.' + field.id;
+                          idDiv.addEventListener('click', function(e) {
+                              navigator.clipboard.writeText(e.target.textContent).then(function() {
+                                  e.target.classList.add('copied');
+                                  setTimeout(function() {
+                                      e.target.classList.remove('copied');
+                                  }, 1000);
+                                  showCopyNotification();
+                              });
+                          });
+                          idCell.appendChild(idDiv);
+                          
+                          requiredCell.textContent = field.required ? "是" : "否";
+                      });
+                      
+                      document.getElementById('prefilledUrlContainer').style.display = 'block';
+                      updatePrefilledUrl();
+                  } else {
+                      table.style.display = "none";
+                      document.getElementById("結果顯示區").innerHTML = 
+                          '<p style="padding: 20px; color: #d93025;">' + fields + '</p>';
                   }
-              });
-              
-              const prefilledUrl = params.length > 0 
-                  ? `${baseUrl}?${params.join('&')}`
-                  : baseUrl;
-              
-              document.getElementById('prefilledUrl').textContent = prefilledUrl;
-          }
+              }
+         
+
+                function updatePrefilledUrl() {
+                    let baseUrl = originalFormUrl;
+                    baseUrl = baseUrl.split('?')[0];
+                    
+                    if (baseUrl.includes('/edit')) {
+                        baseUrl = baseUrl.replace('/edit', '/viewform');
+                    }
+                    if (!baseUrl.includes('/viewform')) {
+                        baseUrl += '/viewform';
+                    }
+                    
+                    baseUrl = baseUrl.replace('?usp=sf_link', '').replace('&usp=sf_link', '');
+                    
+                    const params = [];
+                    
+                    document.querySelectorAll('[data-entry-id]').forEach(element => {
+                        const entryId = element.getAttribute('data-entry-id');
+                        
+                        if (element.classList.contains('datetime-group')) {
+                            const dateInput = element.querySelector('input[type="date"]');
+                            const timeInputs = element.querySelectorAll('.time-input');
+                            const ampmSelect = element.querySelector('.ampm-select');
+                            
+                            if (dateInput && dateInput.value) {
+                                const date = new Date(dateInput.value);
+                                const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+                                
+                                let value = formattedDate;
+                                if (timeInputs.length === 2 && timeInputs[0].value && timeInputs[1].value) {
+                                    value += ` ${timeInputs[0].value}:${timeInputs[1].value} ${ampmSelect.value}`;
+                                }
+                                params.push(`${entryId}=${encodeURIComponent(value)}`);
+                            }
+                        } else if (element.classList.contains('time-group')) {
+                            const timeInputs = element.querySelectorAll('.time-input');
+                            const ampmSelect = element.querySelector('.ampm-select');
+                            
+                            if (timeInputs.length === 2 && timeInputs[0].value && timeInputs[1].value) {
+                                const value = `${timeInputs[0].value}:${timeInputs[1].value} ${ampmSelect.value}`;
+                                params.push(`${entryId}=${encodeURIComponent(value)}`);
+                            }
+                        } else if (element.classList.contains('grid-group')) {
+                            element.querySelectorAll('.grid-row').forEach(row => {
+                                const inputs = row.querySelectorAll('input:checked');
+                                inputs.forEach(input => {
+                                    params.push(`${input.name}=${encodeURIComponent(input.value)}`);
+                                });
+                            });
+                        } else if (element.classList.contains('checkbox-group')) {
+                            const checkedBoxes = element.querySelectorAll('input[type="checkbox"]:checked');
+                            checkedBoxes.forEach(checkbox => {
+                                params.push(`${entryId}=${encodeURIComponent(checkbox.value)}`);
+                            });
+                        } else if (element.classList.contains('radio-group')) {
+                            const checkedRadio = element.querySelector('input[type="radio"]:checked');
+                            if (checkedRadio) {
+                                params.push(`${entryId}=${encodeURIComponent(checkedRadio.value)}`);
+                            }
+                        } else if (element.value) {
+                            params.push(`${entryId}=${encodeURIComponent(element.value)}`);
+                        }
+                    });
+                    
+                    const prefilledUrl = params.length > 0 
+                        ? `${baseUrl}?${params.join('&')}`
+                        : baseUrl;
+                    
+                    document.getElementById('prefilledUrl').textContent = prefilledUrl;
+                }
+
+
 
           function copyPrefilledUrl() {
               const prefilledUrl = document.getElementById('prefilledUrl').textContent;
