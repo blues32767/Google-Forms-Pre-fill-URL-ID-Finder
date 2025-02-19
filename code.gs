@@ -1,8 +1,8 @@
 /**
- * Google 表單欄位資訊查詢工具
+ * Google 表單欄位(Entry ID)資訊查詢工具 Google Form Question Entry ID Find tool
  * @author blues32767
  * @version 1.0.0
- * @created 2025/02/19
+ * @created taiwan 2025/02/19
  * @github https://github.com/blues32767
  */
 
@@ -19,7 +19,7 @@ function getFormFields(formUrl) {
     
     // 尋找 FB_PUBLIC_LOAD_DATA_
     var match = htmlContent.match(/var FB_PUBLIC_LOAD_DATA_ = (.*?);/);
-    if (!match) return "無法找到表單資料";
+    if (!match) return "無法找到表單資料 Unable to find form data";
     
     var formData = JSON.parse(match[1]);
     var fields = formData[1][1]; // 取得欄位資訊
@@ -38,6 +38,6 @@ function getFormFields(formUrl) {
     return fieldInfo;
   } catch (error) {
     Logger.log(error);
-    return "錯誤：" + error.toString();
+    return "Error錯誤：" + error.toString();
   }
 }
