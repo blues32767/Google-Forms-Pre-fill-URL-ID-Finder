@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google表單 欄位ID(entry)資訊查詢工具</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .input-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        label {
+            font-weight: 500;
+            color: #5f6368;
+        }
+        
+        input[type="url"] {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="url"]:focus {
+            border-color: #1a73e8;
+            outline: none;
+        }
+        
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #1557b0;
+        }
+        
+        .result-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            color: #202124;
+            font-weight: 500;
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+            user-select: all;
+            transition: background-color 0.2s;
+        }
+        
+        tr:hover td {
+            background-color: #f8f9fa;
+        }
+        
+        td.selected {
+            background-color: #e8f0fe !important;
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #323232;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            display: none;
+            animation: fadeInOut 2s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Google表單 欄位ID(entry)資訊查詢工具</h1>
+
+    <div class="input-container">
+        <div class="input-group">
+            <label for="formUrl">請輸入 Google 表單網址：</label>
+            <input type="url" id="formUrl" name="formUrl" placeholder="https://docs.google.com/forms/...">
+            <button onclick="查詢()">查詢欄位資訊</button>
+        </div>
+    </div>
+
+    <div id="結果顯示區" class="result-container">
+        <table id="fieldsTable" style="display:none">
+            <thead>
+                <tr>
+                    <th>欄位標題</th>
+                    <th>欄位 ID(entry)</th>
+                    <th>必填欄位</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="copyNotification" class="copy-notification">
+        已複製到剪貼簿！
+    </div>
+
+
+    <footer class="footer">
+        <p>
+            © 2025 Google 表單欄位資訊查詢工具 | 開發者：<a href="https://github.com/blues32767" target="_blank">blues32767</a>
+            <br>
+            <small>Version 1.0.0 | Last Updated: 2025/02/19</small>
+        </p>
+    </footer>
+
+    <script>
+       /**
+         * Google表單欄位ID(entry)資訊查詢工具
+         * @author blues32767
+         * @version 1.0.0
+         * @created 2025/02/19
+         * @github https://github.com/blues32767
+         */
+    
+        function 查詢() {
+            var formUrl = document.getElementById("formUrl").value;
+            if (!formUrl) {
+                alert("請輸入表單網址");
+                return;
+            }
+
+            google.script.run
+                .withSuccessHandler(顯示欄位資訊)
+                .getFormFields(formUrl);
+        }
+
+        function 顯示欄位資訊(fields) {
+            var table = document.getElementById("fieldsTable");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            tbody.innerHTML = "";
+
+            if (Array.isArray(fields)) {
+                table.style.display = "table";
+                fields.forEach(function(field) {
+                    var row = tbody.insertRow();
+                    var cells = [
+                        row.insertCell(0),
+                        row.insertCell(1),
+                        row.insertCell(2)
+                    ];
+                    
+                    cells[0].textContent = field.title;
+                    cells[1].textContent = field.id;
+                    cells[2].textContent = field.required ? "是" : "否";
+                    
+                    cells.forEach(cell => {
+                        cell.addEventListener('click', function(e) {
+                            // 移除其他儲存格的選中狀態
+                            document.querySelectorAll('td.selected').forEach(td => {
+                                td.classList.remove('selected');
+                            });
+                            
+                            // 添加選中狀態
+                            this.classList.add('selected');
+                            
+                            // 複製內容到剪貼簿
+                            navigator.clipboard.writeText(this.textContent).then(() => {
+                                showCopyNotification();
+                            });
+                        });
+                    });
+                });
+            } else {
+                table.style.display = "none";
+                document.getElementById("結果顯示區").innerHTML = '<p style="padding: 20px; color: #d93025;">' + fields + '</p>';
+            }
+        }
+        
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.style.display = 'block';
+            
+            // 重置動畫
+            notification.style.animation = 'none';
+            notification.offsetHeight; // 觸發重排
+            notification.style.animation = 'fadeInOut 2s ease-in-out';
+            
+            // 2秒後隱藏通知
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+    
+
+        
+</body>
+</html>
