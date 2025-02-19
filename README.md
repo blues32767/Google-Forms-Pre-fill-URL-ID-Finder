@@ -1,7 +1,7 @@
-# Google表單欄位ID(entry)資訊查詢工具 
-# Google Form Question Entry ID Find tool
+# Google 表單預填網址產生器 + 欄位 ID 查詢工具
+# Google Forms Pre-fill URL Generator & Field ID Finder
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.1.0-blue)
 ![Updated](https://img.shields.io/badge/updated-2025--02--19-green)
 
 [English](#english) | [中文說明](#chinese)
@@ -11,14 +11,21 @@
 <a name="chinese"></a>
 # 中文說明
 
-這是一個專門用於查詢 Google 表單欄位 entry ID 的工具。當您需要透過程式自動填寫或處理 Google 表單時，這個工具可以幫助您快速獲取所需的 entry ID、欄位標題與必填狀態資訊，並且可以直接產生預填網址。
-*如果需要登入的Google表單，則無法使用本工具。
+這是一個整合預填網址產生和欄位 ID 查詢的工具。當您需要透過程式自動填寫或處理 Google 表單時，這個工具可以幫助您：
+1. 快速獲取所需的 entry ID、欄位標題與必填狀態資訊
+2. 直接產生預填答案的網址
+
+## 使用限制
+
+⚠️ 本工具有以下限制：
+1. 無法讀取需要登入的 Google 表單（例如：含有檔案上傳功能的表單）
+2. 無法預先填寫日期、時間欄位
 
 ## 主要功能
 
-- 🔍 快速查詢表單欄位的名稱、欄位entry ID（例如：entry.1234567890）
-- ✏️ 可產生預填答案的網址
-- 📋 點擊即可複製欄位資訊
+- 🔍 快速查詢表單欄位的名稱、欄位 entry ID（例如：entry.1234567890）
+- ✏️ 自動產生預填答案的網址
+- 📋 點擊即可複製欄位資訊或預填網址
 - ✨ 清楚顯示必填欄位標記
 - 🎯 簡潔直觀的操作介面
 - 💡 複製成功即時提示
@@ -52,14 +59,22 @@
 <a name="english"></a>
 # English Documentation
 
-A specialized tool for inspecting Google Form field entry IDs and generating prefilled URLs. This tool helps developers quickly retrieve entry IDs, field titles, and required status information when working with Google Forms programmatically.
+A comprehensive tool that combines Google Forms pre-fill URL generation and field ID lookup capabilities. This tool helps developers and users to:
+1. Quickly retrieve entry IDs, field titles, and required status information
+2. Generate pre-filled URLs for Google Forms
+
+## Limitations
+
+⚠️ Please note the following limitations:
+1. Cannot process Google Forms that require login (e.g., forms with file upload)
+2. Cannot pre-fill date and time fields
 
 ## Key Features
 
 - 🔍 Quick lookup of form field names and entry IDs (e.g., entry.1234567890)
-- 📋 One-click copy of field information
+- ✏️ Automatic generation of pre-filled URLs
+- 📋 One-click copy of field information and pre-filled URLs
 - ✨ Clear indication of required fields
--  ✏️Generate prefilled URL with answers
 - 🎯 Intuitive user interface
 - 💡 Instant copy confirmation
 
