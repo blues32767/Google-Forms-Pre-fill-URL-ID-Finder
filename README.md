@@ -6,7 +6,7 @@
 
 [English](#english) | [中文說明](#chinese)
 
-工具連結 | Tool Link: https://script.google.com/macros/s/AKfycbwhxuWAOrCc36cLnAmr4VnEvgue0cXF1R-cOCii2uwOUViptrsrLk5osbf5i_AKnbRy/exec
+工具連結 | Tool Link: <a href="https://script.google.com/macros/s/AKfycbwhxuWAOrCc36cLnAmr4VnEvgue0cXF1R-cOCii2uwOUViptrsrLk5osbf5i_AKnbRy/exec" target="_blank">https://script.google.com/macros/s/AKfycbwhxuWAOrCc36cLnAmr4VnEvgue0cXF1R-cOCii2uwOUViptrsrLk5osbf5i_AKnbRy/exec</a>
 
 <a name="chinese"></a>
 # 中文說明
