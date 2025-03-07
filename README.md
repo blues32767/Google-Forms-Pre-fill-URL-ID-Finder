@@ -141,6 +141,9 @@ MIT License
 
 ## 更新記錄
 
+### v1.1.0 (2025/03/07)
+- 修復表單標題如有特殊符號「&」則無法判斷的bug。
+  
 ### v1.0.0 (2025/02/19)
 - 初始版本發布
 - 實現基本查詢功能
@@ -179,8 +182,9 @@ MIT License
 
 - Author: blues32767
 - GitHub: [blues32767](https://github.com/blues32767)
-- Version: 1.0.0
-- Last Updated: Taiwan 2025/02/19
+- Version: 1.1.0
+- Last Updated: Taiwan 2025/03/07
+
 
 ## License
 
@@ -188,6 +192,9 @@ MIT License
 
 ## Changelog
 
+### v1.1.0 (2025/03/07)
+- 20250307-Fixed the bug that the form title cannot be judged if there is a special symbol "&".
+- 
 ### v1.0.0 (2025/02/19)
 - Initial release
 - Implemented basic query functionality
